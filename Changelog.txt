@@ -23,4 +23,4 @@
 - Texture check to fix beds using old api
 - 'bed_sleep_divide' setting added [1 for all, 2 for half, 3 for third]
 - Add POVA support
-
+- Add pink fancy bed and blue simple bed
