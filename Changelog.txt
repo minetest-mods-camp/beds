@@ -22,3 +22,5 @@
 - Updated to use default bed functions
 - Texture check to fix beds using old api
 - 'bed_sleep_divide' setting added [1 for all, 2 for half, 3 for third]
+- Add POVA support
+

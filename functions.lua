@@ -6,6 +6,9 @@ if enable_respawn == nil then
 	enable_respawn = true
 end
 
+-- is pova active
+local is_pova = minetest.get_modpath("pova")
+
 -- support for MT game translation.
 local S = beds.get_translator
 
@@ -91,11 +94,16 @@ local function lay_down(player, pos, bed_pos, state, skip)
 
 		beds.player[name] = nil
 
-		player:set_physics_override({
-			speed = physics_override.speed,
-			jump = physics_override.jump,
-			gravity = physics_override.gravity
-		})
+		if is_pova then
+			pova.del_override(name, "force")
+			pova.do_override(player)
+		else
+			player:set_physics_override({
+				speed = physics_override.speed,
+				jump = physics_override.jump,
+				gravity = physics_override.gravity
+			})
+		end
 
 		player:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
 		player:set_look_horizontal(math.random(1, 180) / 100)
@@ -158,7 +166,13 @@ local function lay_down(player, pos, bed_pos, state, skip)
 			z = bed_pos.z + dir.z / 2
 		}
 
-		player:set_physics_override({speed = 0, jump = 0, gravity = 0})
+		if is_pova then
+			pova.add_override(name, "force", {speed = 0, jump = 0, gravity = 0})
+			pova.do_override(player)
+		else
+			player:set_physics_override({speed = 0, jump = 0, gravity = 0})
+		end
+
 		player:set_pos(p)
 		player_api.player_attached[name] = true
 		hud_flags.wielditem = false
