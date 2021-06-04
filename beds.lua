@@ -9,8 +9,8 @@ beds.register_bed("beds:fancy_bed", {
 	wield_image = "beds_bed_fancy.png",
 	tiles = {"beds_fancy_bed.png", "default_wood.png"},
 	mesh = "beds_fancy_bed.obj",
-	selectionbox = {-0.5, -0.5, -0.5, 0.5, 0.1875, 1.5},
-	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0, 1.5},
+	selectionbox = {-0.5, -0.5, -0.5, 0.5, -0.06, 1.5},
+	collisionbox = {-0.5, -0.5, -0.5, 0.5, -0.06, 1.5},
 	recipe = {
 		{"", "", "group:stick"},
 		{"wool:white", "wool:white", "wool:white"},
@@ -24,8 +24,8 @@ beds.register_bed("beds:fancy_bed_pink", {
 	wield_image = "beds_bed_fancy_pink.png",
 	tiles = {"beds_fancy_bed_pink.png", "default_wood.png"},
 	mesh = "beds_fancy_bed.obj",
-	selectionbox = {-0.5, -0.5, -0.5, 0.5, 0.1875, 1.5},
-	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0, 1.5},
+	selectionbox = {-0.5, -0.5, -0.5, 0.5, -0.06, 1.5},
+	collisionbox = {-0.5, -0.5, -0.5, 0.5, -0.06, 1.5},
 	recipe = {
 		{"", "", "group:stick"},
 		{"wool:pink", "wool:pink", "wool:white"},
