@@ -27,16 +27,18 @@ function beds.register_bed(name, def)
 		paramtype = "light",
 		paramtype2 = "facedir",
 		stack_max = 1,
-		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, bed = 1,
-				fall_damage_add_percent = -40, bouncy = 85},
+		groups = {
+			choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, bed = 1,
+			fall_damage_add_percent = -40, bouncy = 85
+		},
 		sounds = default.node_sound_wood_defaults(),
 		selection_box = {
 			type = "fixed",
-			fixed = def.selectionbox,
+			fixed = def.selectionbox
 		},
 		collision_box = {
 			type = "fixed",
-			fixed = def.collisionbox,
+			fixed = def.collisionbox
 		},
 
 		on_place = function(itemstack, placer, pointed_thing)
