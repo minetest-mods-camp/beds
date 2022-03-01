@@ -1,4 +1,3 @@
--- support for MT game translation.
 local S = beds.get_translator
 
 -- Fancy shaped bed

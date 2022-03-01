@@ -3,6 +3,7 @@ local org_file = world_path .. "/beds_spawns"
 local file = world_path .. "/beds_spawns"
 local bkwd = false
 
+
 -- check for PA's beds mod spawns
 local cf = io.open(world_path .. "/beds_player_spawns", "r")
 
@@ -11,6 +12,7 @@ if cf ~= nil then
 	file = world_path .. "/beds_player_spawns"
 	bkwd = true
 end
+
 
 function beds.read_spawns()
 
@@ -47,7 +49,9 @@ function beds.read_spawns()
 	end
 end
 
+
 beds.read_spawns()
+
 
 function beds.save_spawns()
 
@@ -66,6 +70,7 @@ function beds.save_spawns()
 	io.close(output)
 end
 
+
 function beds.set_spawns()
 
 	for name,_ in pairs(beds.player) do
@@ -81,6 +86,7 @@ function beds.set_spawns()
 
 	beds.save_spawns()
 end
+
 
 function beds.remove_spawns_at(pos)
 

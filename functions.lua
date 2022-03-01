@@ -1,3 +1,6 @@
+local S = beds.get_translator
+local is_50 = minetest.get_modpath("player_api")
+local is_pova = minetest.get_modpath("pova")
 local pi = math.pi
 local is_sp = minetest.is_singleplayer()
 local enable_respawn = minetest.settings:get_bool("enable_bed_respawn")
@@ -5,12 +8,6 @@ local enable_respawn = minetest.settings:get_bool("enable_bed_respawn")
 if enable_respawn == nil then
 	enable_respawn = true
 end
-
--- is pova active
-local is_pova = minetest.get_modpath("pova")
-
--- support for MT game translation.
-local S = beds.get_translator
 
 -- Helper functions
 
@@ -33,6 +30,7 @@ local function get_look_yaw(pos)
 	end
 end
 
+
 local function is_night_skip_enabled()
 
 	local enable_night_skip = minetest.settings:get_bool("enable_bed_night_skip")
@@ -43,6 +41,7 @@ local function is_night_skip_enabled()
 
 	return enable_night_skip
 end
+
 
 local function check_in_beds(players)
 
@@ -63,6 +62,7 @@ local function check_in_beds(players)
 
 	return #players > 0
 end
+
 
 local function lay_down(player, pos, bed_pos, state, skip)
 
@@ -108,12 +108,17 @@ local function lay_down(player, pos, bed_pos, state, skip)
 		player:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
 		player:set_look_horizontal(math.random(1, 180) / 100)
 
-		player_api.player_attached[name] = false
-		hud_flags.wielditem = true
-		player_api.set_animation(player, "stand" , 30)
+		if is_50 then
+			player_api.player_attached[name] = false
+			player_api.set_animation(player, "stand" , 30)
+		else
+			default.player_attached[name] = false
+			default.player_set_animation(player, "stand" , 30)
+		end
 
-	-- lay down
-	else
+		hud_flags.wielditem = true
+
+	else -- lay down
 
 		-- Check if bed is occupied
 		for _, other_pos in pairs(beds.bed_position) do
@@ -174,13 +179,21 @@ local function lay_down(player, pos, bed_pos, state, skip)
 		end
 
 		player:set_pos(p)
-		player_api.player_attached[name] = true
+
+		if is_50 then
+			player_api.player_attached[name] = true
+			player_api.set_animation(player, "lay" , 0)
+		else
+			default.player_attached[name] = true
+			default.player_set_animation(player, "lay" , 0)
+		end
+
 		hud_flags.wielditem = false
-		player_api.set_animation(player, "lay" , 0)
 	end
 
 	player:hud_set_flags(hud_flags)
 end
+
 
 local function get_player_in_bed_count()
 
@@ -192,6 +205,7 @@ local function get_player_in_bed_count()
 
 	return c
 end
+
 
 local function update_formspecs(finished)
 
@@ -218,7 +232,6 @@ local function update_formspecs(finished)
 	end
 end
 
-
 -- Public functions
 
 function beds.kick_players()
@@ -231,9 +244,11 @@ function beds.kick_players()
 	end
 end
 
+
 function beds.skip_night()
 	minetest.set_timeofday(0.23)
 end
+
 
 function beds.on_rightclick(pos, player)
 
@@ -283,6 +298,7 @@ function beds.on_rightclick(pos, player)
 	end
 end
 
+
 function beds.can_dig(bed_pos)
 
 	-- Check all players in bed which one is at the expected position
@@ -297,6 +313,7 @@ function beds.can_dig(bed_pos)
 end
 
 -- Callbacks
+
 -- Only register respawn callback if respawn enabled
 if enable_respawn then
 
@@ -312,6 +329,7 @@ if enable_respawn then
 		end
 	end)
 end
+
 
 minetest.register_on_leaveplayer(function(player)
 
@@ -335,6 +353,7 @@ minetest.register_on_leaveplayer(function(player)
 	end
 end)
 
+
 minetest.register_on_dieplayer(function(player)
 
 	local name = player:get_player_name()
@@ -348,6 +367,7 @@ minetest.register_on_dieplayer(function(player)
 		player:set_pos(pos)
 	end
 end)
+
 
 local div = tonumber(minetest.settings:get("bed_sleep_divide")) or 2
 
