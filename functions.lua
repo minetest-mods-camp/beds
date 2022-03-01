@@ -1,6 +1,6 @@
 local S = beds.get_translator
 local is_50 = minetest.get_modpath("player_api")
-local is_53 = minetest.has_feature("object_step_has_moveresult")
+local is_54 = minetest.has_feature("direct_velocity_on_players")
 local is_pova = minetest.get_modpath("pova")
 local pi = math.pi
 local is_sp = minetest.is_singleplayer()
@@ -133,7 +133,7 @@ local function lay_down(player, pos, bed_pos, state, skip)
 		end
 
 		-- Check if player is moving
-		if is_53 and vector.length(player:get_velocity()) > 0.001 then
+		if is_54 and vector.length(player:get_velocity()) > 0.001 then
 
 			minetest.chat_send_player(name,
 					S("You have to stop moving before going to bed!"))
