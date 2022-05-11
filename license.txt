@@ -61,5 +61,5 @@ For more details:
 http://creativecommons.org/licenses/by-sa/3.0/
 
 
-WTFPL license applies to screenshot.jpg file by jp from his mesh beds mod:
+WTFPL license applies to bed .obj files by jp from mesh beds mod:
 https://forum.minetest.net/viewtopic.php?t=11817
