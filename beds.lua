@@ -91,6 +91,24 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
+	recipe = "beds:fancy_bed_pink",
+	burntime = 13
+})
+
+minetest.register_craft({
+	type = "fuel",
 	recipe = "beds:bed",
+	burntime = 12
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "beds:bed_blue",
+	burntime = 12
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "beds:bed_white",
 	burntime = 12
 })

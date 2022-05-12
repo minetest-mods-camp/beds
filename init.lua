@@ -27,6 +27,7 @@ beds = {
 	bed_position = {},
 	pos = {},
 	spawn = {},
+	respawn = {},
 	get_translator = S,
 	formspec = "size[8,11;true]"
 	.. "no_prepend[]"

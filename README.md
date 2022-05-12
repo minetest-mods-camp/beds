@@ -77,6 +77,14 @@ Crafting are same as original default mod, but colored uses a white plus the oth
 | beds:bed_top_red            | beds:bed_top            |
 | beds:bed_bottom_red         | beds:bed_bottom         |
 
+#### Mini-Game Support
+
+If enable_bed_respawn is set to true and a player dies when playing a mini-game then this
+can interrupt the game, so a special beds.respawn[player_name] flag has been added which
+is set to 'true' by default to always respawn player at their bed, but can be set to
+'false' during a mini-game to stop this behaviour.
+
+
 License
 ------
 
