@@ -23,6 +23,7 @@ end
 
 
 beds = {
+	mod = "redo",
 	player = {},
 	bed_position = {},
 	pos = {},
