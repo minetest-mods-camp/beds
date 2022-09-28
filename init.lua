@@ -29,6 +29,7 @@ beds = {
 	pos = {},
 	spawn = {},
 	respawn = {},
+	day_interval = {start = 0.2, finish = 0.805},
 	get_translator = S,
 	formspec = "size[8,11;true]"
 	.. "no_prepend[]"

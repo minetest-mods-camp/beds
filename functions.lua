@@ -155,9 +155,6 @@ local function lay_down(player, pos, bed_pos, state, skip)
 		beds.bed_position[name] = bed_pos
 		beds.player[name] = {physics_override = player:get_physics_override()}
 
-		-- physics, eye_offset, etc
-		player:set_eye_offset({x = 0, y = -13, z = 0}, {x = 0, y = 0, z = 0})
-
 		local yaw, param2 = get_look_yaw(bed_pos)
 
 		player:set_look_horizontal(yaw)
@@ -257,7 +254,7 @@ function beds.on_rightclick(pos, player)
 	local ppos = player:get_pos()
 	local tod = minetest.get_timeofday()
 
-	if tod > 0.2 and tod < 0.805 then
+		if tod > beds.day_interval.start and tod < beds.day_interval.finish then
 
 		if beds.player[name] then
 			lay_down(player, nil, nil, false)
