@@ -4,11 +4,8 @@ local is_54 = minetest.has_feature("direct_velocity_on_players")
 local is_pova = minetest.get_modpath("pova")
 local pi = math.pi
 local is_sp = minetest.is_singleplayer()
-local enable_respawn = minetest.settings:get_bool("enable_bed_respawn")
+local enable_respawn = minetest.settings:get_bool("enable_bed_respawn") ~= false
 
-if enable_respawn == nil then
-	enable_respawn = true
-end
 
 -- Helper functions
 
@@ -205,11 +202,13 @@ local function get_player_in_bed_count()
 end
 
 
+local div = tonumber(minetest.settings:get("bed_sleep_divide")) or 2
+
 local function update_formspecs(finished)
 
 	local ges = #minetest.get_connected_players()
 	local player_in_bed = get_player_in_bed_count()
-	local is_majority = (ges / 2) < player_in_bed
+	local is_majority = (ges / div) <= player_in_bed
 	local form_n
 	local esc = minetest.formspec_escape
 
@@ -381,8 +380,6 @@ minetest.register_on_dieplayer(function(player)
 end)
 
 
-local div = tonumber(minetest.settings:get("bed_sleep_divide")) or 2
-
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 	if formname ~= "beds_form" then
@@ -403,7 +400,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 		-- check if enough players are sleeping to skip night (was half)
 		local is_majority = (
-				#minetest.get_connected_players() / div) < last_player_in_bed
+				#minetest.get_connected_players() / div) <= last_player_in_bed
 
 		if is_majority and is_night_skip_enabled() then
 			update_formspecs(true)

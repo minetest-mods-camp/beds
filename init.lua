@@ -46,4 +46,4 @@ dofile(modpath .. "/beds.lua")
 dofile(modpath .. "/spawns.lua")
 
 
-print("[MOD] Beds loaded")
+print("[MOD] Beds Redo loaded")
